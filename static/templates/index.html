@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Digit Recognition</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+
+            min-height:100vh;
+
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background:linear-gradient(
+                135deg,
+                #0f172a,
+                #1e293b,
+                #312e81
+            );
+        }
+
+        .container{
+
+            width:500px;
+
+            padding:40px;
+
+            border-radius:20px;
+
+            background:rgba(255,255,255,0.08);
+
+            backdrop-filter:blur(15px);
+
+            text-align:center;
+
+            color:white;
+
+            box-shadow:0 8px 25px rgba(0,0,0,0.3);
+        }
+
+        h1{
+
+            margin-bottom:15px;
+
+            color:#38bdf8;
+        }
+
+        p{
+
+            margin-bottom:25px;
+
+            color:#cbd5e1;
+        }
+
+        input[type=file]{
+
+            width:100%;
+
+            padding:12px;
+
+            border-radius:10px;
+
+            border:none;
+
+            background:white;
+
+            margin-bottom:20px;
+        }
+
+        button{
+
+            padding:12px 25px;
+
+            border:none;
+
+            border-radius:10px;
+
+            background:#22c55e;
+
+            color:white;
+
+            font-size:16px;
+
+            cursor:pointer;
+
+            transition:.3s;
+        }
+
+        button:hover{
+
+            transform:translateY(-2px);
+        }
+
+        .result{
+
+            margin-top:25px;
+
+            padding:20px;
+
+            border-radius:15px;
+
+            background:rgba(255,255,255,0.05);
+        }
+
+        .digit{
+
+            font-size:80px;
+
+            font-weight:bold;
+
+            color:#38bdf8;
+        }
+
+        .confidence{
+
+            margin-top:10px;
+
+            font-size:20px;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>AI Digit Recognition</h1>
+
+    <p>
+        Upload a handwritten digit image and let AI predict it.
+    </p>
+
+    <form
+        action="/predict"
+        method="POST"
+        enctype="multipart/form-data">
+
+        <input
+            type="file"
+            name="image"
+            accept="image/*"
+            required>
+
+        <button type="submit">
+            Predict Digit
+        </button>
+
+    </form>
+
+    {% if prediction is defined %}
+
+    <div class="result">
+
+        <div class="digit">
+            {{ prediction }}
+        </div>
+
+        <div class="confidence">
+            Confidence: {{ confidence }}%
+        </div>
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+</body>
+
+</html>
